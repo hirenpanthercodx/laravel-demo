@@ -46,10 +46,8 @@
                                     <a class='btn btn-primary btn-sm' role="button" name="update" onClick="window.location.href='{{ url("/dashboard/edit/$item->id") }}'">Edit</a>  
                                 </div>
                                 <div>
-                                    <form method='POST'>
-                                        <input type=hidden name=id >
-                                        <input type="submit" class='btn btn-danger btn-sm' role="button" name="insert" value="Delete" />
-                                    </form>                               
+                                    <input type=hidden name=id >
+                                    <button class='btn btn-danger btn-sm' onclick="window.location.href='{{ url('user/delete/'. $item->id) }}'">Delete</button>                              
                                 </div>
                             </div>
                         </td>

@@ -27,7 +27,7 @@ class AuthController extends Controller
             // ];
 
             // return response()->json($response, 200);
-            return redirect('/dashboard');
+            return $user->role === 'admin' ? redirect('/dashboard') : redirect('/employee');
         } else {
             $response = [
                 'success' => false,
@@ -43,7 +43,7 @@ class AuthController extends Controller
  
         Session::invalidate();
         Session::regenerateToken();
-        return redirect('/');
+        return redirect('/login');
     }
 
     public function register (Request $request) {
@@ -61,14 +61,16 @@ class AuthController extends Controller
             }
 
             $user = new User();
-
+            
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
             $user->role = $request->role;
             $user->permisssion = json_encode($request->permission);
-
+            
             $user->save();
-
+            
+            Session::regenerate();
+            Session::put('auth_user', $user);
             // $success['token'] = $user->createToken('MyApp')->plainTextToken;
             // $success['email'] = $user->email;
 
@@ -79,7 +81,7 @@ class AuthController extends Controller
             // ];
 
             // return response()->json($response, 200);
-            return redirect('/dashboard');
+            return $user->role === 'admin' ? redirect('/dashboard') : redirect('/employee');
 
         } catch ( \Exception $e ) {
             return response()->json(['error'=>$e->getMessage()], 500);

@@ -106,4 +106,9 @@ class AdminController extends Controller
             return response()->json(['error'=>$e->getMessage()], 500);
         }
     }  
+
+    public function delete(Request $request) {
+        Admin::destroy($request->id);
+        return redirect('/dashboard');
+    }
 }

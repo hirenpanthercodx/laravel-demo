@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\Response;
 
-class EnsureSessionIsValid
+class verifyAuthenticate
 {
     /**
      * Handle an incoming request.
@@ -17,10 +17,9 @@ class EnsureSessionIsValid
     public function handle(Request $request, Closure $next): Response
     {
         if (Session::get('auth_user')) {
-            return $next($request);
+            return redirect('/dashboard');
         } else {
-            return redirect('/login');
+            return $next($request);
         }
-
     }
 }
