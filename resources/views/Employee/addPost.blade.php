@@ -23,7 +23,7 @@
         <input type="text" name="oldImage" value="{{$editPost->image ?? ''}}" hidden />
         <button type="submit" class="btn btn-success w-100" >{{($editPost ?? '') ? 'Update' : 'Create'}}</button>
     </form>
-    @if ($editPost ?? '')
+    @if (($editPost ?? '') && in_array('delete', json_decode(session('auth_user')->permisssion)))
         <button class="btn btn-danger" onclick="window.location.href='{{ url('delete/post/'. ($editPost->id ?? '')) }}'">Delete</button>
     @endif 
 </div>

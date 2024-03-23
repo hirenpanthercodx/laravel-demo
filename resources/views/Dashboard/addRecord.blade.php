@@ -2,7 +2,7 @@
 
 <div class='card'>
     <div class="d-flex">
-        <button class='btn btn-outline-secondary mr-4' onClick="window.location.href='{{ url("/dashboard") }}'">Back</button>
+        <button class='btn btn-outline-secondary mr-4' onClick="window.location.href='{{ url("/admin") }}'">Back</button>
         <h4 class='mb-0 d-flex align-items-center'>Insert Record | PHP CRUD Operations</h4>
     </div>
     <hr>

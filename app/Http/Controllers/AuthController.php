@@ -27,7 +27,7 @@ class AuthController extends Controller
             // ];
 
             // return response()->json($response, 200);
-            return $user->role === 'admin' ? redirect('/dashboard') : redirect('/employee');
+            return $user->role === 'admin' ? redirect('/admin') : redirect('/employee');
         } else {
             $response = [
                 'success' => false,
@@ -81,7 +81,7 @@ class AuthController extends Controller
             // ];
 
             // return response()->json($response, 200);
-            return $user->role === 'admin' ? redirect('/dashboard') : redirect('/employee');
+            return $user->role === 'admin' ? redirect('/admin') : redirect('/employee');
 
         } catch ( \Exception $e ) {
             return response()->json(['error'=>$e->getMessage()], 500);

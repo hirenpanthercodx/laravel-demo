@@ -31,14 +31,14 @@ Route::post('/user/login', [AuthController::class, 'login']);
 Route::post('/user/register', [AuthController::class, 'register']);
 Route::get('/logout', [AuthController::class, 'logout']);
 
-Route::middleware('session')->group(function () {
-    Route::get('/dashboard/addRecord', function () { return view('Dashboard.addRecord'); });
-    Route::get('/dashboard/edit/{id}', [AdminController::class, 'editRecord']);
+Route::middleware(['session', 'role'])->group(function () {
+    Route::get('/admin/addRecord', function () { return view('Dashboard.addRecord'); });
+    Route::get('/admin/edit/{id}', [AdminController::class, 'editRecord']);
 
     Route::get('/employee/addPost', function () { return view('Employee.addPost'); });
     Route::get('/employee/edit/{id}', [EmployeeController::class, 'editPost']);
 
-    Route::get('/dashboard', [AdminController::class, 'dashboardData']);
+    Route::get('/admin', [AdminController::class, 'dashboardData']);
     Route::get('/employee', [EmployeeController::class, 'employeeDashboardData']);
 
     Route::post('/user/store', [AdminController::class, 'store']);
@@ -48,6 +48,4 @@ Route::middleware('session')->group(function () {
     Route::post('/create/post', [EmployeeController::class, 'store']);
     Route::post('/update/post/{id}', [EmployeeController::class, 'update']);
     Route::get('/delete/post/{id}', [EmployeeController::class, 'delete']);
-
-
 });

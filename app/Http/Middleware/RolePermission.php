@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\Response;
 
-class verifyAuthenticate
+class RolePermission
 {
     /**
      * Handle an incoming request.
@@ -16,8 +16,8 @@ class verifyAuthenticate
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Session::get('auth_user')) {
-            return Session::get('auth_user')->role === 'admin' ? redirect('/admin') : redirect('/employee');
+        if (strpos($request->fullUrl(), Session::get('auth_user')->role) == false) {
+            return redirect((Session::get('auth_user')->role === 'admin') ? '/admin' : '/employee');
         } else {
             return $next($request);
         }

@@ -66,7 +66,7 @@ class AdminController extends Controller
             //     'message' => 'user register successfully'
             // ];
             // return response()->json($response, 200);
-            return redirect('/dashboard');
+            return redirect('/admin');
 
         } catch ( \Exception $e ) {
             return response()->json(['error'=>$e->getMessage()], 500);
@@ -100,7 +100,7 @@ class AdminController extends Controller
                 'hobby' => gettype($request->hobby) === 'string' ? $request->hobby : json_encode($request->hobby)
             ]);
             
-            return redirect('/dashboard');
+            return redirect('/admin');
 
         } catch ( \Exception $e ) {
             return response()->json(['error'=>$e->getMessage()], 500);
@@ -109,6 +109,6 @@ class AdminController extends Controller
 
     public function delete(Request $request) {
         Admin::destroy($request->id);
-        return redirect('/dashboard');
+        return redirect('/admin');
     }
 }
