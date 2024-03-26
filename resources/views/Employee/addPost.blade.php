@@ -9,7 +9,7 @@
             <h4 class='d-flex align-items-center mb-0'>{{($editPost ?? '') ? 'Update' : 'Create' }} Post</h4>
         </div>
     </div>
-    <form method="post" action="{{ ($editPost ?? '') ? url('/update/post/'.($editPost->id ?? '')) : url('/create/post') }}" enctype="multipart/form-data">
+    <form method="post" action="{{ ($editPost ?? '') ? url('/employee/update/post/'.($editPost->id ?? '')) : url('/employee/create/post') }}" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="inputGroupFile04">Upload Image</label>
@@ -24,6 +24,6 @@
         <button type="submit" class="btn btn-success w-100" >{{($editPost ?? '') ? 'Update' : 'Create'}}</button>
     </form>
     @if (($editPost ?? '') && in_array('delete', json_decode(session('auth_user')->permisssion)))
-        <button class="btn btn-danger" onclick="window.location.href='{{ url('delete/post/'. ($editPost->id ?? '')) }}'">Delete</button>
+        <button class="btn btn-danger" onclick="window.location.href='{{ url('employee/delete/post/'. ($editPost->id ?? '')) }}'">Delete</button>
     @endif 
 </div>

@@ -41,11 +41,11 @@ Route::middleware(['session', 'role'])->group(function () {
     Route::get('/admin', [AdminController::class, 'dashboardData']);
     Route::get('/employee', [EmployeeController::class, 'employeeDashboardData']);
 
-    Route::post('/user/store', [AdminController::class, 'store']);
-    Route::post('/user/update', [AdminController::class, 'update']);
-    Route::get('/user/delete/{id}', [AdminController::class, 'delete']);
+    Route::post('/admin/user/store', [AdminController::class, 'store']);
+    Route::post('/admin/user/update', [AdminController::class, 'update']);
+    Route::get('/admin/user/delete/{id}', [AdminController::class, 'delete']);
 
-    Route::post('/create/post', [EmployeeController::class, 'store']);
-    Route::post('/update/post/{id}', [EmployeeController::class, 'update']);
-    Route::get('/delete/post/{id}', [EmployeeController::class, 'delete']);
+    Route::post('/employee/create/post', [EmployeeController::class, 'store']);
+    Route::post('/employee/update/post/{id}', [EmployeeController::class, 'update']);
+    Route::get('/employee/delete/post/{id}', [EmployeeController::class, 'delete']);
 });

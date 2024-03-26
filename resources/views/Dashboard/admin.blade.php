@@ -54,7 +54,7 @@
                                     @if (in_array('delete', json_decode(session('auth_user')->permisssion)))
                                         <div>
                                             <input type=hidden name=id >
-                                            <button class='btn btn-danger btn-sm' onclick="window.location.href='{{ url('user/delete/'. $item->id) }}'">Delete</button>                              
+                                            <button class='btn btn-danger btn-sm' onclick="window.location.href='{{ url('admin/user/delete/'. $item->id) }}'">Delete</button>                              
                                         </div>
                                     @endif
                                 </div>

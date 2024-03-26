@@ -6,7 +6,7 @@
         <h4 class='mb-0 d-flex align-items-center'>Insert Record | PHP CRUD Operations</h4>
     </div>
     <hr>
-    <form method="post" action="{{ url(($editData ?? '') ? '/user/update' : '/user/store') }}">
+    <form method="post" action="{{ url(($editData ?? '') ? '/admin/user/update' : '/admin/user/store') }}">
         @csrf
         <div>
             <div class="d-flex">
@@ -69,7 +69,7 @@
             </div>
         </div>
         <div class="d-flex justify-content-end mr-4">
-            <input type="submit" class='btn btn-primary' role="button" name="insert" value="Submit" />
+            <button  type="submit" class='btn btn-primary'>{{($editData ?? '') ? 'Update' : 'Create'}}</button>
         </div>
     </form>
 </div>

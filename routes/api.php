@@ -19,6 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::post('/user/store', [AdminController::class, 'store']);
+// Route::post('/admin/user/store', [AdminController::class, 'store']);
 
-// Route::post('/user/update', [AdminController::class, 'update']);
+// Route::post('/admin/user/update', [AdminController::class, 'update']);
