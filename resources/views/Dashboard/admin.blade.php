@@ -63,6 +63,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $listingData->links() }}
         </div>  
     @endif
 </div> 

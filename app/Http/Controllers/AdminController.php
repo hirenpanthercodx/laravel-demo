@@ -12,7 +12,7 @@ class AdminController extends Controller
 {
 
     public function dashboardData() {
-        $data = Admin::all();
+        $data = Admin::simplePaginate(10);
          // dd(Session::get('auth_user'));
 
         return view('Dashboard.admin', ['listingData' => $data]);
