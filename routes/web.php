@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\FullCalenderController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,8 @@ Route::middleware(['session', 'role'])->group(function () {
     Route::get('/employee/addPost', function () { return view('Employee.addPost'); });
     Route::get('/employee/edit/{id}', [EmployeeController::class, 'editPost']);
 
+    Route::get('/admin/dropdown', [AdminController::class, 'dashboardDropdown']);
+
     Route::get('/admin', [AdminController::class, 'dashboardData']);
     Route::get('/employee', [EmployeeController::class, 'employeeDashboardData']);
 
@@ -48,4 +51,11 @@ Route::middleware(['session', 'role'])->group(function () {
     Route::post('/employee/create/post', [EmployeeController::class, 'store']);
     Route::post('/employee/update/post/{id}', [EmployeeController::class, 'update']);
     Route::get('/employee/delete/post/{id}', [EmployeeController::class, 'delete']);
+
+    Route::get('/admin/calendar', [FullCalenderController::class, 'index']);
+    Route::post('/admin/calendar/action', [FullCalenderController::class, 'action']);
+
+    Route::post('/admin/calendar/store', [FullCalenderController::class, 'store']);
+    Route::get('/admin/calendar/edit/{id}', [FullCalenderController::class, 'edit']);
+    Route::post('/admin/calendar/delete', [FullCalenderController::class, 'delete']);
 });

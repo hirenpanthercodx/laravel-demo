@@ -1,5 +1,6 @@
 @extends('Layouts.app')
 {{-- @section('content') --}}
+<div class="bodyMain">
     <div class="main"> 
         <form method="post" action="{{ url('/user/register') }}">
             @csrf
@@ -56,4 +57,5 @@
             </div> 
         </form>
     </div>  
+</div>
 {{-- @endsection --}}

@@ -18,6 +18,11 @@ class AdminController extends Controller
         return view('Dashboard.admin', ['listingData' => $data]);
     }
     
+    public function dashboardDropdown() {
+        $data = Admin::all();
+        return response()->json($data);
+    }
+
     public function editRecord(Request $request) {
         $id = $request->route('id');
 
