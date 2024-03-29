@@ -52,17 +52,31 @@ class FullCalenderController extends Controller
 
 	public function store(Request $request) {
 		if ($request->id) {
-			Event::findOrFail($request->id)->update([
-				'title'		=>	$request->title,
-				'start'		=>	$request->start,
-				'end'		=>	$request->end
-			]);
+			try {
+				Event::findOrFail($request->id)->update([
+					'title'		=>	$request->title,
+					'admin_id'	=>	$request->user,
+					'start'		=>	$request->start,
+					'end'		=>	$request->end
+				]);
+				session()->flash('update_calendar', 'Calendar was update successfully!');
+			} catch ( \Exception $e ) {
+				session()->flash('update_error_calendar', 'calendar update unsuccessful');
+				return redirect('/admin/calendar');
+			}
 		} else {
-			Event::create([
-				'title'		=>	$request->title,
-				'start'		=>	$request->start,
-				'end'		=>	$request->end
-			]);
+			try {
+				Event::create([
+					'title'		=>	$request->title,
+					'admin_id'	=>	$request->user,
+					'start'		=>	$request->start,
+					'end'		=>	$request->end
+				]);
+				session()->flash('create_calendar', 'Calendar create successfully!');
+			} catch ( \Exception $e ) {
+				session()->flash('create_error_calendar', 'Calendar create unsuccessful!');
+				return redirect('/admin/calendar');
+			}
 		}
 		return redirect('/admin/calendar');
     }
@@ -73,7 +87,13 @@ class FullCalenderController extends Controller
     }
 
 	public function delete(Request $request) {
-		Event::destroy($request->delete_id);
-		return redirect('/admin/calendar');
+		try {
+			Event::destroy($request->delete_id);
+			session()->flash('delete_calendar', 'Calendar was delete successfully!');
+			return redirect('/admin/calendar');
+		} catch ( \Exception $e ) {
+			session()->flash('delete_error_calendar', 'Calendar delete unsuccessful!');
+			return redirect('/admin/calendar');
+		}
     }
 }

@@ -89,7 +89,10 @@
 
   <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content" style="top: 100px">
+        <div class="modal-content" style="top: 25vh">
+          <div class="d-flex justify-content-center mt-3">
+            <h3 class="modal-title" id="itemModalLabel">Add Event</h3>
+          </div>
           <form method="post" action="{{ url('/admin/calendar/store') }}">
             @csrf
             <div class="modal-body" id="mediumBody">
@@ -120,50 +123,59 @@
               </div>
             </div>
           </form>
-          <div style="position: absolute; top: 84%; margin-left: 16px">
-            <form method="post" action="{{ url('/admin/calendar/delete') }}">
-              @csrf
-              <input type="text" name="delete_id" id="delete_id" hidden/>
-              <button class="btn btn-danger">Delete</button>
-            </form>
+          <div style="position: absolute; top: 86%; margin-left: 16px">
+            <button class="btn btn-danger" id="deleteBtn" data-toggle="modal" data-target="#exampleModal">Delete</button>
           </div>
         </div>
     </div>
   </div>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="top: 25vh; width: 95%">
+          <div class="d-flex justify-content-center mt-3">
+            <h3 class="modal-title" id="itemModalLabel">Delete Event</h3>
+          </div>
+          <form method="post" action="{{ url('/admin/calendar/delete') }}">
+            @csrf
+            <div class="modal-body" id="deleteBody">
+              <div class="form-group d-flex justify-content-center">
+                  <input type="text" name="delete_id" id="delete_id" hidden/>
+                  <p>Are you sure wan to delete this event ?</p>
+              </div>
+              <div class="d-flex justify-content-end">
+                <button class="btn btn-secondary mr-3" data-dismiss="modal">Cancel</button>
+                <button class="btn btn-success" type="submit">Delete</button>
+              </div>
+            </div>
+          </form>
+        </div>
+    </div>
+  </div>
+  
+  @if (session('create_calendar'))
+    <script>
+      toastr.success('{{ session('create_calendar') }}');
+    </script>
+  @elseif(session('create_error_calendar'))
+    <script>
+      toastr.error('{{ session('create_error_calendar') }}');
+    </script>
+  @elseif(session('update_calendar'))
+    <script>
+      toastr.success('{{ session('update_calendar') }}');
+    </script>
+  @elseif(session('update_error_calendar'))
+    <script>
+      toastr.error('{{ session('update_error_calendar') }}');
+    </script>
+  @elseif(session('delete_calendar'))
+    <script>
+      toastr.success('{{ session('delete_calendar') }}');
+    </script>
+  @elseif(session('delete_error_calendar'))
+    <script>
+      toastr.error('{{ session('delete_error_calendar') }}');
+    </script>
+  @endif
 @endsection
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-    var button = document.getElementById("mediumButton");
-
-      button.addEventListener("click", function() {
-        document.querySelector('select[name="user"]').value = '';
-        document.querySelector('input[name="title"]').value = '';
-        document.querySelector('input[name="start"]').value = '';
-        document.querySelector('input[name="end"]').value = '';
-
-        $('#mediumModal').modal("show");
-
-        $.ajax({
-          url: '/admin/dropdown',
-          type: 'GET',
-          success: function(response) {
-              // $('#user').empty();
-              $('#user').append($('<option>', {
-                    value: null,
-                    text: 'Select User'
-              }));
-              $.each(response, function(index, user) {
-                  $('#user').append($('<option>', {
-                      value: user.id,
-                      text: user.firstName + ' ' + user.lastName
-                  }));
-              });
-          },
-          error: function(xhr, status, error) {
-              console.error(xhr.responseText);
-          }
-        });
-      });
-    }); 
-  </script>
