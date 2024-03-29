@@ -13,8 +13,6 @@ class AdminController extends Controller
 
     public function dashboardData() {
         $data = Admin::simplePaginate(10);
-         // dd(Session::get('auth_user'));
-
         return view('Dashboard.admin', ['listingData' => $data]);
     }
     
@@ -57,23 +55,11 @@ class AdminController extends Controller
             $user->hobby = json_encode($request->hobby);
 
             $user->save();
-
-            // $success['firstName'] = $user->firstName;
-            // $success['lastName'] = $user->lastName;
-            // $success['email'] = $user->email;
-            // $success['gender'] = $user->gender;
-            // $success['occupation'] = $user->occupation;
-            // $success['hobby'] = $user->hobby;
-
-            // $response = [
-            //     'success' => true,
-            //     'data' => $success,
-            //     'message' => 'user register successfully'
-            // ];
-            // return response()->json($response, 200);
+            session()->flash('create_user', 'User create successfully');
             return redirect('/admin');
 
         } catch ( \Exception $e ) {
+            session()->flash('create_error_user', 'User create unsuccessful');
             return response()->json(['error'=>$e->getMessage()], 500);
         }
     }   
@@ -104,16 +90,22 @@ class AdminController extends Controller
                 'occupation' => $request->occupation,
                 'hobby' => gettype($request->hobby) === 'string' ? $request->hobby : json_encode($request->hobby)
             ]);
-            
+            session()->flash('update_user', 'User update successfully');
             return redirect('/admin');
 
         } catch ( \Exception $e ) {
+            session()->flash('update_error_user', 'User update unsuccessful');
             return response()->json(['error'=>$e->getMessage()], 500);
         }
     }  
 
     public function delete(Request $request) {
-        Admin::destroy($request->id);
+        try {
+            Admin::destroy($request->deleteUserId);
+			session()->flash('delete_user', 'User delete successfully!');
+        } catch (\Exception $e) {
+            session()->flash('delete_error_user', 'User delete unsuccessful');
+        }
         return redirect('/admin');
     }
 }

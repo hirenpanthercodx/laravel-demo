@@ -178,7 +178,7 @@
     document.addEventListener("DOMContentLoaded", function() {
         var button = document.getElementById("mediumButton");
 
-        button.addEventListener("click", function() {
+        button?.addEventListener("click", function() {
             document.querySelector('select[name="user"]').value = '';
             document.querySelector('input[name="title"]').value = '';
             document.querySelector('input[name="start"]').value = '';
@@ -209,3 +209,8 @@
             });
         });
     }); 
+
+    function deleteButton (id) {
+        $('#deleteUserModel').modal("show");
+        $('#deleteUserId').val(id);
+    }

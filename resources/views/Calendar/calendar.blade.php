@@ -9,8 +9,8 @@
             <h1>Calendar</h1>
           </div>
           <div class="col-sm-6">
-            <a class="btn btn-success text-light float-sm-right" data-toggle="modal" id="mediumButton"
-                title="Create a project">Add Event
+            <a class="btn btn-success text-light float-sm-right" data-toggle="modal" id="mediumButton">
+              Add Event
             </a>
           </div>
         </div>

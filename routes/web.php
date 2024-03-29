@@ -46,7 +46,8 @@ Route::middleware(['session', 'role'])->group(function () {
 
     Route::post('/admin/user/store', [AdminController::class, 'store']);
     Route::post('/admin/user/update', [AdminController::class, 'update']);
-    Route::get('/admin/user/delete/{id}', [AdminController::class, 'delete']);
+    // Route::get('/admin/user/delete/{id}', [AdminController::class, 'delete']);
+    Route::post('/admin/user/delete', [AdminController::class, 'delete']);
 
     Route::post('/employee/create/post', [EmployeeController::class, 'store']);
     Route::post('/employee/update/post/{id}', [EmployeeController::class, 'update']);

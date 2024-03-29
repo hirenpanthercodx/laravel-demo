@@ -54,8 +54,9 @@
                                         @endif
                                         @if (in_array('delete', json_decode(session('auth_user')->permisssion)))
                                             <div>
-                                                <input type=hidden name=id >
-                                                <button class='btn btn-danger btn-sm' onclick="window.location.href='{{ url('admin/user/delete/'. $item->id) }}'">Delete</button>                              
+                                                {{-- <input type=hidden name=id > --}}
+                                                {{-- <button class='btn btn-danger btn-sm' onclick="window.location.href='{{ url('admin/user/delete/'. $item->id) }}'">Delete</button>                               --}}
+                                                <a class='btn btn-danger text-black btn-sm' onclick="deleteButton({{$item->id}})">Delete</a>                              
                                             </div>
                                         @endif
                                     </div>
@@ -68,4 +69,54 @@
             </div>  
         @endif
     </div> 
+
+    <div class="modal fade" id="deleteUserModel" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="top: 25vh; width: 95%">
+              <div class="d-flex justify-content-center mt-3">
+                <h3 class="modal-title" id="itemModalLabel">Delete Event</h3>
+              </div>
+              <form method="post" action="{{ url('/admin/user/delete') }}">
+                @csrf
+                <div class="modal-body" id="deleteBody">
+                  <div class="form-group d-flex justify-content-center">
+                      <input type="text" name="deleteUserId" id="deleteUserId" hidden/>
+                      <p>Are you sure wan to delete this event ?</p>
+                  </div>
+                  <div class="d-flex justify-content-end">
+                    <button class="btn btn-secondary mr-3" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-success" type="submit">Delete</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+        </div>
+    </div>
+
+    @if (session('create_user'))
+        <script>
+            toastr.success('{{ session('create_user') }}');
+        </script>
+    @elseif(session('create_error_user'))
+        <script>
+            toastr.error('{{ session('create_error_user') }}');
+        </script>
+    @elseif(session('update_user'))
+        <script>
+            toastr.success('{{ session('update_user') }}');
+        </script>
+    @elseif(session('update_error_user'))
+        <script>
+            toastr.error('{{ session('update_error_user') }}');
+        </script>
+    @elseif(session('delete_user'))
+        <script>
+            toastr.success('{{ session('delete_user') }}');
+        </script>
+    @elseif(session('delete_error_user'))
+        <script>
+            toastr.error('{{ session('delete_error_user') }}');
+        </script>
+    @endif
+
 @endsection
