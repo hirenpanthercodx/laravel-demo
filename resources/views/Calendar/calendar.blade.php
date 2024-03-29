@@ -123,35 +123,14 @@
               </div>
             </div>
           </form>
-          <div style="position: absolute; top: 86%; margin-left: 16px">
-            <button class="btn btn-danger" id="deleteBtn" data-toggle="modal" data-target="#exampleModal">Delete</button>
+          <div style="position: absolute; top: 89%; margin-left: 16px">
+            <a class="btn btn-danger" id="deleteBtn" onclick="deleteEventButton()">Delete</a>
           </div>
         </div>
     </div>
   </div>
 
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content" style="top: 25vh; width: 95%">
-          <div class="d-flex justify-content-center mt-3">
-            <h3 class="modal-title" id="itemModalLabel">Delete Event</h3>
-          </div>
-          <form method="post" action="{{ url('/admin/calendar/delete') }}">
-            @csrf
-            <div class="modal-body" id="deleteBody">
-              <div class="form-group d-flex justify-content-center">
-                  <input type="text" name="delete_id" id="delete_id" hidden/>
-                  <p>Are you sure wan to delete this event ?</p>
-              </div>
-              <div class="d-flex justify-content-end">
-                <button class="btn btn-secondary mr-3" data-dismiss="modal">Cancel</button>
-                <button class="btn btn-success" type="submit">Delete</button>
-              </div>
-            </div>
-          </form>
-        </div>
-    </div>
-  </div>
+  <x-delete-model url="/admin/calendar/delete" nameField="delete_id" modelId="deleteCalendarEvent" header="Event"/>
   
   @if (session('create_calendar'))
     <script>

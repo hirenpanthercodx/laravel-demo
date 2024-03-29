@@ -1,7 +1,7 @@
 @extends('Layouts.app')
 
 @section('admin_dashboard') 
-    <div class='card m-0'>
+    <div class='card m-0' style="height: 98vh">
         <div class='d-flex justify-content-between my-3'>
             <h4 class='d-flex align-items-center mb-0'>Admin Dashboard</h4>
             <div class='d-flex'>
@@ -70,28 +70,7 @@
         @endif
     </div> 
 
-    <div class="modal fade" id="deleteUserModel" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content" style="top: 25vh; width: 95%">
-              <div class="d-flex justify-content-center mt-3">
-                <h3 class="modal-title" id="itemModalLabel">Delete Event</h3>
-              </div>
-              <form method="post" action="{{ url('/admin/user/delete') }}">
-                @csrf
-                <div class="modal-body" id="deleteBody">
-                  <div class="form-group d-flex justify-content-center">
-                      <input type="text" name="deleteUserId" id="deleteUserId" hidden/>
-                      <p>Are you sure wan to delete this event ?</p>
-                  </div>
-                  <div class="d-flex justify-content-end">
-                    <button class="btn btn-secondary mr-3" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-success" type="submit">Delete</button>
-                  </div>
-                </div>
-              </form>
-            </div>
-        </div>
-    </div>
+    <x-delete-model url="/admin/user/delete" nameField="deleteUserId" modelId="deleteUserModel" header="User" />
 
     @if (session('create_user'))
         <script>

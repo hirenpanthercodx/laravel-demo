@@ -39,7 +39,7 @@
     @if (session('auth_user') && session('auth_user')->role === 'admin')    
         <div style="display: flex">
             <div style="width: 250px">
-                <aside class="main-sidebar sidebar-dark-primary elevation-4">
+                <aside class="sidebar-dark-primary elevation-4 h-100">
                     <p class="brand-link m-0">
                         <img class="brand-image elevation-3" style="opacity: 0.8">
                         <span class="brand-text font-weight-light">AdminLTE 3</span>
@@ -87,8 +87,8 @@
             </div>
             <div class="p-2" style="width: 85%">
                 @yield('admin_dashboard')
-                @yield('edit_admin')
                 @yield('calender')
+                @yield('edit_admin')
             </div>
         </div>
     @else

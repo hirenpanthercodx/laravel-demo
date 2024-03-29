@@ -214,3 +214,7 @@
         $('#deleteUserModel').modal("show");
         $('#deleteUserId').val(id);
     }
+
+    function deleteEventButton () {
+        $('#deleteCalendarEvent').modal("show");
+    }
